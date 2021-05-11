@@ -9,7 +9,7 @@ server {
 
     sub_filter_once off;
     sub_filter 'ENVIRONMENT2' '${ENVIRONMENT2}';
-    sub_filter 'SUPERSECRET' '${SUPERSECRET}';        
+    sub_filter 'SUPERSECRET' '${SUPERSECRET}';
     sub_filter 'server_hostname' '${DOLLAR}hostname';
     sub_filter 'server_address' '${DOLLAR}server_addr:${DOLLAR}server_port';
     sub_filter 'server_url' '${DOLLAR}request_uri';
