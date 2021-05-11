@@ -15,7 +15,7 @@ jobs:
           command: docker build -t $IMAGE_NAME:latest .
   publish-latest:
     environment:
-      IMAGE_NAME: hello-nginx
+      IMAGE_NAME: emiliork1231/hello-nginx
     docker:
       - image: emiliork1231/hello-nginx:latest
     steps:
