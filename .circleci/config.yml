@@ -5,12 +5,11 @@ jobs:
     working_directory: ./
     environment:
       IMAGE_NAME: emiliork1231/hello-nginx
-    # docker:
-    #   - image: emiliork1231/hello-nginx
+     docker:
+      - image: docker:17.05.0-ce-git
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 19.03.13
+      - setup_remote_docker
       - run:
           name: Build Docker image
           command: docker build -t $IMAGE_NAME:latest .
@@ -18,10 +17,9 @@ jobs:
     environment:
       IMAGE_NAME: emiliork1231/hello-nginx
     docker:
-      - image: emiliork1231/hello-nginx:latest
+      - image: docker:17.05.0-ce-git
     steps:
-      - setup_remote_docker:
-          version: 19.03.13
+      - setup_remote_docker
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
