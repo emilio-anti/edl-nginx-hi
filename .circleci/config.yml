@@ -8,7 +8,9 @@ jobs:
       - image: emiliork1231/hello-nginx
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
+          version: 19.03.13
+          docker_layer_caching: true
       - run:
           name: Build Docker image
           command: docker build -t $IMAGE_NAME:latest .
@@ -18,7 +20,9 @@ jobs:
     docker:
       - image: emiliork1231/hello-nginx:latest
     steps:
-      - setup_remote_docker
+      - setup_remote_docker:
+          version: 19.03.13
+          docker_layer_caching: true
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
