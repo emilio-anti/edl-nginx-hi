@@ -7,14 +7,14 @@ executors:
     docker:
       - image: docker:17.05.0-ce-git
 jobs:
-  build-push:
+  build:
     executor: docker-publisher
     steps:
       - checkout
       - setup_remote_docker
       - run:
           name: Build Docker image
-          command: |
+          command:
             docker build -t $IMAGE_NAME:latest .
   publish-latest:
     executor: docker-publisher
