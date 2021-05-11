@@ -51,7 +51,7 @@ workflows:
               only: main
       - deploy_to_cluster:
           requires:
-            - build_and_test
+            - build_push
           filters:
             branches:
-              only: master
+              only: main
