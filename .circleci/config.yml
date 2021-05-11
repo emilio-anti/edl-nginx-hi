@@ -16,6 +16,8 @@ jobs:
   publish-latest:
     environment:
       IMAGE_NAME: emiliork1231/hello-nginx
+    docker:
+      - image: docker:17.05.0-ce-git
     steps:
       - setup_remote_docker
       - run:
@@ -32,8 +34,6 @@ workflows:
             branches:
               only: main
       - publish-latest:
-          requires:
-            - build
           filters:
             branches:
               only: main
