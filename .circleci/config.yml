@@ -1,28 +1,18 @@
 ---
 version: 2
-executors:
-  docker-publisher:
+jobs:
+  build-push:
     environment:
       IMAGE_NAME: emiliork1231/hello-nginx
     docker:
       - image: docker:17.05.0-ce-git
-jobs:
-  build:
-    executor: docker-publisher
     steps:
       - checkout
       - setup_remote_docker
       - run:
           name: Build Docker image
-          command:
-            docker build -t $IMAGE_NAME:latest .
-  publish-latest:
-    executor: docker-publisher
-    steps:
-      - setup_remote_docker
-      - run:
-          name: Publish Docker Image to Docker Hub
           command: |
+            docker build -t $IMAGE_NAME:latest .
             docker login -u "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASS"
             docker push $IMAGE_NAME:latest
 workflows:
@@ -30,12 +20,6 @@ workflows:
   build-master:
     jobs:
       - build:
-          filters:
-            branches:
-              only: main
-      - publish-latest:
-          requires:
-            - build
           filters:
             branches:
               only: main
