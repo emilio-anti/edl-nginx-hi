@@ -19,7 +19,7 @@ jobs:
     docker:
       - image: google/cloud-sdk
     environment:
-      - PROJECT_NAME: "nginx-hello-deployment1"
+      - PROJECT_NAME: "nginx-hello-deployment2"
       - GOOGLE_PROJECT_ID: "k8s-helm-challenge-edl"
       - GOOGLE_COMPUTE_ZONE: "us-east1"
       - GOOGLE_CLUSTER_NAME: "edl-challenge-dev"

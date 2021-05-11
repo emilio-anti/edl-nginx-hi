@@ -45,7 +45,7 @@ spec:
       securityContext:
         {}
       containers:
-        - name: nginx-hello
+        - name: ${PROJECT_NAME}
           securityContext:
             {}
           image: "emiliork1231/hello-nginx"
@@ -61,3 +61,20 @@ spec:
               protocol: TCP
           resources:
             {}
+---
+# Source: nginx-hello/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ${PROJECT_NAME}
+  labels:
+    name: ${PROJECT_NAME}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['${PROJECT_NAME}:80']
+  restartPolicy: Never
