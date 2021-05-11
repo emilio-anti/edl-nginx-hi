@@ -2,10 +2,10 @@
 version: 2
 jobs:
   build:
-    working_directory: /
     environment:
       IMAGE_NAME: emiliork1231/hello-nginx
-     docker:
+    working_directory: /
+    docker:
       - image: docker:17.05.0-ce-git
     steps:
       - checkout
