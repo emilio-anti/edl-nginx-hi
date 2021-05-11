@@ -2,7 +2,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ./
+    working_directory: /
     environment:
       IMAGE_NAME: emiliork1231/hello-nginx
      docker:
