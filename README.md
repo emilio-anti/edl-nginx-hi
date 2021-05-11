@@ -1,23 +1,19 @@
+# Using environment variables in nginx configuration
+The image was modified in order to be able to add environment variables to the .conf file. The index.html was modified also so it can display the values Environment and a Secret.
 
-# NGINX webserver that serves a simple page containing its hostname, IP address and port as wells as the request URI and the local time of the webserver.
+#### NGINX webserver that serves a simple page containing its hostname, IP address and port as wells as the request URI and the local time of the webserver.
 
-The images are uploaded to Docker Hub -- https://hub.docker.com/r/nginxdemos/hello/.
+
+The images are uploaded to Docker Hub
+
+To download the image run:
+```
+$ docker pull emiliork1231/hello-nginx:latest
+```
 
 How to run:
 ```
-$ docker run -P -d nginxdemos/hello
-```
-
-Now, assuming we found out the IP address and the port that mapped to port 80 on the container, in a browser we can make a request to the webserver and get the page below: ![hello](hello.png)
-
-A plain text version of the image is available as `nginxdemos/hello:plain-text`. This version returns the same information in the plain text format:
-```
-$ curl <ip>:<port>
-Server address: 172.17.0.2:80
-Server name: 22becba5323d
-Date: 07/Feb/2018:16:05:05 +0000
-URI: /
-Request ID: 48ba0db334a6ed165e783469c2af868f
+$ docker run -P -d emiliork1231/hello-nginx:latest
 ```
 
 The images were created to be used as simple backends for various load balancing demos.
