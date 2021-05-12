@@ -39,7 +39,7 @@ jobs:
           command: |
             helmfile --version
             cd helm
-            ls -al
+            helmfile -e dev apply
 #            envsubst < ${HOME}/project/k8s.yml > ${HOME}/k8s.yml
 #            helmfile -e dev apply
 #            kubectl apply -f ${HOME}/k8s.yml
