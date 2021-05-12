@@ -39,12 +39,16 @@ jobs:
           name: Deploy to Kubernetes
           command: |
             envsubst < ${HOME}/project/k8s.yml > ${HOME}/k8s.yml
-            apt-get install wget
+            apt-get install curl wget
+            curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+            chmod 700 get_helm.sh
+            ./get_helm.sh
             wget https://github.com/roboll/helmfile/releases/download/v0.138.4/helmfile_linux_amd64 -O helmfile
             chmod +x helmfile
             cp helmfile /usr/bin/
             helmfile --version
             helm plugin install https://github.com/databus23/helm-diff
+
 #            kubectl apply -f ${HOME}/k8s.yml
 #            kubectl rollout status deployment/${PROJECT_NAME}
 workflows:
