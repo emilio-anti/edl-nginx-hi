@@ -67,7 +67,7 @@ jobs:
 #            envsubst < ${HOME}/project/k8s.yml > ${HOME}/k8s.yml
 #            helmfile -e dev apply
 #            kubectl apply -f ${HOME}/k8s.yml
-#            kubectl rollout status deployment/${PROJECT_NAME}
+
 workflows:
   version: 2
   build-master:
