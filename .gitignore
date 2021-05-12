@@ -8,3 +8,7 @@ dist
 *.tfstate.*
 **/terraform.tfstate
 **/terraform.tfstate.backup
+
+
+# tf lock file
+**/.terraform.lock.hcl

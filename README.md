@@ -1,3 +1,11 @@
+# Deploying Custom Nginx-hello Image Using Terraform, GKE, CIRCLECI, Helmfile, Helm and Helm-secrets
+
+The repository contains all that is needed in order to deploy using Circleci a custom nginx-hello using helmfile, helm and helm-secrets in a GKE cluster.
+
+Currently the repository contains 2 branches dev and main which belongs to stage.
+
+The repository triggers an automatic deployment using circleci config.yml file or can be built manually. If you go through the repository there are README.md files with information about the deployment.
+
 # Using environment variables in nginx configuration
 The image was modified in order to be able to add environment variables to the .conf file. The index.html was modified also so it can display the values Environment and a Secret.
 
