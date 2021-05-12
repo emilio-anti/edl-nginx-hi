@@ -21,4 +21,4 @@ spec:
           - name: "SUPERSECRET"
             value: test1
         ports:
-        - containerPort: 80
+          - containerPort: 80
