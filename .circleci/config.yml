@@ -17,7 +17,7 @@ jobs:
             docker push $IMAGE_NAME:latest
   deploy_to_cluster:
     docker:
-      - image: kiwigrid/gcloud-kubectl-helm:latest
+      - image: emiliork1231/gcp-sdk:latest
     environment:
       - PROJECT_NAME: "nginx-hello-deployment8"
       - GOOGLE_PROJECT_ID: "k8s-helm-challenge-edl"
@@ -28,7 +28,6 @@ jobs:
       - run:
           name: Setup Google Cloud SDK
           command: |
-            exec su-exec root apk add gettext
             echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
             gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
@@ -38,15 +37,10 @@ jobs:
       - run:
           name: Deploy to Kubernetes
           command: |
-            envsubst < ${HOME}/project/k8s.yml > ${HOME}/k8s.yml
-            exec su-exec root apk add wget 
-            wget https://github.com/roboll/helmfile/releases/download/v0.138.4/helmfile_linux_amd64 -O helmfile
-            chmod +x helmfile
-            cp helmfile /usr/bin/
+#            envsubst < ${HOME}/project/k8s.yml > ${HOME}/k8s.yml
             helmfile --version
-            helm plugin install https://github.com/databus23/helm-diff
-#            cd helm
-#            ls
+            cd helm
+            ls
 #            helmfile -e dev apply
 
 #            kubectl apply -f ${HOME}/k8s.yml
