@@ -53,7 +53,7 @@ jobs:
             cp helmfile /usr/bin/
             helmfile --version
             helm plugin install https://github.com/databus23/helm-diff
-#            #helm plugin install https://github.com/zendesk/helm-secrets
+            helm plugin install https://github.com/zendesk/helm-secrets
 #            cd helm
 #            ls
 #            helmfile -e dev apply
