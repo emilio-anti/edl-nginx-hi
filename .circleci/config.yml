@@ -28,7 +28,7 @@ jobs:
       - run:
           name: Setup Google Cloud SDK
           command: |
-            apk add gettext
+            sudo apk add gettext
             echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
             gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
@@ -39,7 +39,7 @@ jobs:
           name: Deploy to Kubernetes
           command: |
             envsubst < ${HOME}/project/k8s.yml > ${HOME}/k8s.yml
-            apk add wget
+            sudo apk add wget
             wget https://github.com/roboll/helmfile/releases/download/v0.138.4/helmfile_linux_amd64 -O helmfile
             chmod +x helmfile
             cp helmfile /usr/bin/
