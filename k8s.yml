@@ -19,12 +19,12 @@ spec:
         image: "emiliork1231/hello-nginx"
         imagePullPolicy: IfNotPresent
         env:
-          - name: "ENVIRONMENT2"
-            value: "Development"
-          - name: "SUPERSECRET"
-            value: test1
+        - name: "ENVIRONMENT2"
+          value: "Development"
+        - name: "SUPERSECRET"
+          value: test1
         ports:
-          - containerPort: 80
+        - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -36,10 +36,10 @@ metadata:
 spec:
   externalTrafficPolicy: Local
   ports:
-    - name: http
-      port: 80
-      protocol: TCP
-      targetPort: 80
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
   selector:
     app: ${PROJECT_NAME}
   type: LoadBalancer
