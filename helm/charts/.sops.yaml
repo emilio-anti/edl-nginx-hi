@@ -1,0 +1,2 @@
+creation_rules:
+  - gcp_kms: "projects/k8s-helm-challenge-edl/locations/global/keyRings/sops/cryptoKeys/sops-key"
