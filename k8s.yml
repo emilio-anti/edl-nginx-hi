@@ -33,7 +33,7 @@ spec:
         app: ${PROJECT_NAME}
     spec:
       containers:
-        - name: nginx-hello
+        - name: ${PROJECT_NAME}
           image: "emiliork1231/hello-nginx"
           imagePullPolicy: IfNotPresent
           env:
