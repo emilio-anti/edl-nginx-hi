@@ -66,7 +66,7 @@ jobs:
             cd helm
             helmfile -e stage apply
 #            envsubst < ${HOME}/project/k8s.yml > ${HOME}/k8s.yml
-#            helmfile -e dev apply
+#            helmfile -e dev app
 #            kubectl apply -f ${HOME}/k8s.
 
 workflows:
