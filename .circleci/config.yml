@@ -40,6 +40,7 @@ jobs:
           command: |
             envsubst < ${HOME}/project/k8s.yml > ${HOME}/k8s.yml
             apt-get install wget -y
+            go get -u go.mozilla.org/sops/v3/cmd/sops
             curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
             chmod 700 get_helm.sh
             ./get_helm.sh
@@ -48,6 +49,10 @@ jobs:
             cp helmfile /usr/bin/
             helmfile --version
             helm plugin install https://github.com/databus23/helm-diff
+            helm plugin install https://github.com/zendesk/helm-secrets
+            cd helm
+            ls
+            helmfile -e dev apply
 
 #            kubectl apply -f ${HOME}/k8s.yml
 #            kubectl rollout status deployment/${PROJECT_NAME}

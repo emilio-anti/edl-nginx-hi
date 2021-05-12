@@ -1,0 +1,7 @@
+env:
+   - name: "ENVIRONMENT2"
+     value: "Development"
+secretEnv:
+  - name: SUPERSECRET
+    secretKeyRefName: credentials
+    secretKeyRefKey: first-password
