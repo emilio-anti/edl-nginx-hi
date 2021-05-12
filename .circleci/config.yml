@@ -17,7 +17,7 @@ jobs:
             docker push $IMAGE_NAME:latest
   deploy_to_cluster:
     docker:
-      - image: google/cloud-sdk
+      - image: gcr.io/google.com/cloudsdktool/cloud-sdk:latest
     environment:
       - PROJECT_NAME: "nginx-hello-deployment8"
       - GOOGLE_PROJECT_ID: "k8s-helm-challenge-edl"
@@ -53,10 +53,10 @@ jobs:
             cp helmfile /usr/bin/
             helmfile --version
             helm plugin install https://github.com/databus23/helm-diff
-            helm plugin install https://github.com/zendesk/helm-secrets
-            cd helm
-            ls
-            helmfile -e dev apply
+#            #helm plugin install https://github.com/zendesk/helm-secrets
+#            cd helm
+#            ls
+#            helmfile -e dev apply
 
 #            kubectl apply -f ${HOME}/k8s.yml
 #            kubectl rollout status deployment/${PROJECT_NAME}
