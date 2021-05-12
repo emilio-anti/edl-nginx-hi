@@ -17,7 +17,7 @@ jobs:
             docker push $IMAGE_NAME:latest
   deploy_to_cluster:
     docker:
-      - image: gcr.io/google.com/cloudsdktool/cloud-sdk:latest
+      - image: kiwigrid/gcloud-kubectl-helm:latest
     environment:
       - PROJECT_NAME: "nginx-hello-deployment8"
       - GOOGLE_PROJECT_ID: "k8s-helm-challenge-edl"
@@ -40,20 +40,11 @@ jobs:
           command: |
             envsubst < ${HOME}/project/k8s.yml > ${HOME}/k8s.yml
             apt-get install wget -y
-            wget https://golang.org/dl/go1.16.4.linux-amd64.tar.gz
-            rm -rf /usr/local/go && tar -C /usr/local -xzf go1.16.4.linux-amd64.tar.gz
-            export PATH=$PATH:/usr/local/go/bin
-            go version
-            go get -u go.mozilla.org/sops/v3/cmd/sops
-            curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-            chmod 700 get_helm.sh
-            ./get_helm.sh
             wget https://github.com/roboll/helmfile/releases/download/v0.138.4/helmfile_linux_amd64 -O helmfile
             chmod +x helmfile
             cp helmfile /usr/bin/
             helmfile --version
             helm plugin install https://github.com/databus23/helm-diff
-            helm plugin install https://github.com/zendesk/helm-secrets
 #            cd helm
 #            ls
 #            helmfile -e dev apply
