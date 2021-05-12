@@ -39,7 +39,7 @@ jobs:
           name: Deploy to Kubernetes
           command: |
             envsubst < ${HOME}/project/k8s.yml > ${HOME}/k8s.yml
-            apk add wget -y
+            apk add wget
             wget https://github.com/roboll/helmfile/releases/download/v0.138.4/helmfile_linux_amd64 -O helmfile
             chmod +x helmfile
             cp helmfile /usr/bin/
