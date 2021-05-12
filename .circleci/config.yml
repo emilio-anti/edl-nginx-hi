@@ -37,10 +37,10 @@ jobs:
       - run:
           name: Deploy to Kubernetes
           command: |
-#            envsubst < ${HOME}/project/k8s.yml > ${HOME}/k8s.yml
             helmfile --version
             cd helm
             ls
+#            envsubst < ${HOME}/project/k8s.yml > ${HOME}/k8s.yml
 #            helmfile -e dev apply
 
 #            kubectl apply -f ${HOME}/k8s.yml
