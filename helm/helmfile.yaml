@@ -1,14 +1,6 @@
 environments:
   dev:
-    values:
-      - ./charts/dev.yaml
-    secrets:
-      - ./charts/nginx-hello/secrets.dev.yaml
-  staging:
-    values:
-      - ./charts/staging.yaml
-    secrets:
-      - ./charts/nginx-hello/secrets.staging.yaml
+  stage:
 
 releases:
   - name: nginx-hello

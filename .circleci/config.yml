@@ -15,7 +15,7 @@ jobs:
             docker build -t $IMAGE_NAME:latest .
             docker login -u "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASS"
             docker push $IMAGE_NAME:latest
-  deploy_to_cluster:
+  deploy_to_cluster_dev:
     docker:
       - image: emiliork1231/gcp-sdk:latest
     environment:
@@ -40,6 +40,31 @@ jobs:
             helmfile --version
             cd helm
             helmfile -e dev apply
+  deploy_to_cluster_staging:
+    docker:
+      - image: emiliork1231/gcp-sdk:latest
+    environment:
+      - PROJECT_NAME: "nginx-hello-deployment8"
+      - GOOGLE_PROJECT_ID: "k8s-helm-challenge-edl"
+      - GOOGLE_COMPUTE_ZONE: "us-east1"
+      - GOOGLE_CLUSTER_NAME: "edl-challenge-dev"
+    steps:
+      - checkout
+      - run:
+          name: Setup Google Cloud SDK
+          command: |
+            echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+            gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+            gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
+      # - setup_remote_docker
+      - run:
+          name: Deploy to Kubernetes
+          command: |
+            helmfile --version
+            cd helm
+            helmfile -e stage apply
 #            envsubst < ${HOME}/project/k8s.yml > ${HOME}/k8s.yml
 #            helmfile -e dev apply
 #            kubectl apply -f ${HOME}/k8s.yml
@@ -51,8 +76,16 @@ workflows:
       - build_push:
           filters:
             branches:
-              only: main
-      - deploy_to_cluster:
+              only:
+                - main
+                - dev
+      - deploy_to_cluster_dev:
+          requires:
+            - build_push
+          filters:
+            branches:
+              only: dev
+      - deploy_to_cluster_staging:
           requires:
             - build_push
           filters:
