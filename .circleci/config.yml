@@ -13,9 +13,8 @@ jobs:
           name: Build Docker image
           command: |
             docker build -t $IMAGE_NAME:latest .
-            docker inspect -f '{{.RepoDigests}}' $IMAGE_NAME:latest
             docker login -u "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASS"
-            OUTPUT_SHA_DH=$(docker push $IMAGE_NAME:latest | sed -n 's/.*digest://' | 's/\s.*$//')
+            OUTPUT_SHA_DH=$(docker push $IMAGE_NAME:latest | sed -n 's/.*digest://' | sed 's/\s.*$//')
             echo $OUTPUT_SHA_DH
   deploy_to_cluster_dev:
     docker:
