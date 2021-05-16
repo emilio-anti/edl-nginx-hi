@@ -15,12 +15,8 @@ jobs:
             docker build -t $IMAGE_NAME:latest .
             docker inspect -f '{{.RepoDigests}}' $IMAGE_NAME:latest
             docker login -u "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASS"
-      - docker/push:
-          digest-path: /tmp/digest.txt
-          image: $IMAGE_NAME:latest
-      - run:
-          command: |
-            echo "Digest is: $(</tmp/digest.txt)"
+            OUTPUT_SHA_DH=$(docker push $IMAGE_NAME:latest | sed -n 's/.*digest://p')
+            echo $OUTPUT_SHA_DH
   deploy_to_cluster_dev:
     docker:
       - image: emiliork1231/gcp-sdk:latest
