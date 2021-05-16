@@ -12,3 +12,5 @@ dist
 
 # tf lock file
 **/.terraform.lock.hcl
+
+**/kubeconfig-dev
