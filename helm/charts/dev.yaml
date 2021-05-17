@@ -5,3 +5,10 @@ secretEnv:
   - name: SUPERSECRET
     secretKeyRefName: credentials
     secretKeyRefKey: first-password
+
+image:
+  registry: docker.io
+  repository: emiliork1231/hello-nginx
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ${SHA_ENV}
