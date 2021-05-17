@@ -25,7 +25,6 @@ jobs:
           paths:
             - vars
   deploy_to_cluster_dev:
-    <<: *defaults
     docker:
       - image: emiliork1231/gcp-sdk:latest
     environment:
