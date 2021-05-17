@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   registry: docker.io
-  repository: emiliork1231/hello-nginx@${SHA_ENV}
+  repository: emiliork1231/hello-nginx@${ENV_SHA}
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   # tag: latest
