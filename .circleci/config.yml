@@ -1,7 +1,10 @@
 ---
+defaults: &defaults
+  working_directory: /tmp/cci-test
 version: 2
 jobs:
   build_push:
+    <<: *defaults
     environment:
       IMAGE_NAME: emiliork1231/hello-nginx
     docker:
@@ -14,8 +17,11 @@ jobs:
           command: |
             docker build -t $IMAGE_NAME:latest .
             docker login -u "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASS"
-            OUTPUT_SHA_DH=$(docker push $IMAGE_NAME:latest | sed -n 's/.*digest://p'| sed 's/^ *//g' | sed 's/\s.*$//')
-            echo $OUTPUT_SHA_DH
+            OUTPUT_SHA_DH=$(docker push $IMAGE_NAME:latest | sed 's/.*digest://'| sed 's/^ *//g' | sed 's/\s.*$//')
+            pwd
+            mkdir -p workspace
+            echo $OUTPUT_SHA_DH >> workspace/vars
+            cat workspace/vars
   deploy_to_cluster_dev:
     docker:
       - image: emiliork1231/gcp-sdk:latest
