@@ -18,6 +18,7 @@ jobs:
             docker build -t $IMAGE_NAME:latest .
             docker login -u "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASS"
             OUTPUT_SHA_DH=$(docker push $IMAGE_NAME:latest | sed 's/.*digest://'| sed 's/^ *//g' | sed 's/\s.*$//')
+            echo $OUTPUT_SHA_DH
             pwd
             mkdir -p workspace
             echo $OUTPUT_SHA_DH >> workspace/vars
