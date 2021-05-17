@@ -11,4 +11,5 @@ image:
   repository: emiliork1231/hello-nginx
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ${SHA_ENV}
+  tag: latest
+  digest: ${SHA_ENV}

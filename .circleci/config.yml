@@ -1,10 +1,7 @@
 ---
-defaults: &defaults
-  working_directory: /tmp/cci-test
 version: 2
 jobs:
   build_push:
-    <<: *defaults
     environment:
       IMAGE_NAME: emiliork1231/hello-nginx
     docker:
@@ -15,9 +12,9 @@ jobs:
       - run:
           name: Build Docker image
           command: |
-            docker build -t $IMAGE_NAME:latest .
+            docker build -t $IMAGE_NAME:$CIRCLE_SHA1 .
             docker login -u "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASS"
-            OUTPUT_SHA_DH=$(docker push $IMAGE_NAME:latest | sed -n 's/.*digest://p'| sed 's/^ *//g' | sed 's/\s.*$//')
+            docker push $IMAGE_NAME:$CIRCLE_SHA1
             echo $OUTPUT_SHA_DH
             pwd
             mkdir -p workspace
@@ -42,8 +39,6 @@ jobs:
       - run:
           name: Setup Google Cloud SDK
           command: |
-            SHA=$(cat workspace/vars)
-            export ENV_SHA=$SHA
             echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
             gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
