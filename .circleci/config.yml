@@ -24,9 +24,9 @@ jobs:
             echo $OUTPUT_SHA_DH >> workspace/vars
             cat workspace/vars
       - persist_to_workspace:
-        root: workspace
-        paths:
-          - vars
+          root: workspace
+          paths:
+            - vars
   deploy_to_cluster_dev:
     <<: *defaults
     docker:
