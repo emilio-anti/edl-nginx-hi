@@ -14,7 +14,7 @@ jobs:
           command: |
             docker build -t $IMAGE_NAME:latest .
             docker login -u "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASS"
-            OUTPUT_SHA_DH=$(docker push $IMAGE_NAME:latest | sed -n 's/.*digest://p' | sed 's/\s.*$//p')
+            OUTPUT_SHA_DH=$(docker push $IMAGE_NAME:latest | sed -n 's/.*digest://p' | grep -o '^\S*')
             echo $OUTPUT_SHA_DH
   deploy_to_cluster_dev:
     docker:
