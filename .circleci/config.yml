@@ -36,9 +36,9 @@ jobs:
       - GOOGLE_COMPUTE_ZONE: "us-east1"
       - GOOGLE_CLUSTER_NAME: "edl-challenge-dev"
     steps:
+      - checkout
       - attach_workspace:
           at: /tmp/cci-test/workspace
-      - checkout
       - run:
           name: Setup Google Cloud SDK
           command: |
