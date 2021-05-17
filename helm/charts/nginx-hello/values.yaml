@@ -2,10 +2,10 @@ replicaCount: 1
 
 image:
   registry: docker.io
-  repository: emiliork1231/hello-nginx@${ENV_SHA}
+  repository: emiliork1231/hello-nginx
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  # tag: latest
+  tag: ${SHA_ENV}
 env:
    - name: "ENVIRONMENT2"
      value: "Development"
@@ -37,6 +37,7 @@ service:
   type: LoadBalancer
   port: 80
   # httpsPort: 443
+  #
   # nodePorts:
   #   http: ""
   #   https: ""
