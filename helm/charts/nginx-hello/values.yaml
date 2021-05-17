@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   registry: docker.io
-  repository: emiliork1231/hello-nginx
+  repository: emiliork1231/hello-nginx@${SHA_ENV}
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
@@ -13,12 +13,6 @@ secretEnv:
   - name: SUPERSECRET
     secretKeyRefName: credentials
     secretKeyRefKey: second-password
-  - name: SLIGHTLY_LESS_COOL_ENV
-    secretKeyRefName: credentials
-    secretKeyRefKey: second-password
-  - name: CHILL_ENV
-    secretKeyRefName: credentials
-    secretKeyRefKey: third-password
 
 imagePullSecrets: []
 nameOverride: ""
