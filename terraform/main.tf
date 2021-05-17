@@ -60,7 +60,7 @@ module "gke" {
   node_pools = [
     {
       name                      = "node-pool"
-      machine_type              = "e2-small"
+      machine_type              = var.instance_type
       node_locations            = "us-east1-b,us-east1-c,us-east1-d"
       min_count                 = 1
       max_count                 = 2

@@ -9,5 +9,7 @@ releases:
     values:
       - ./charts/nginx-hello/values.yaml
       - ./charts/{{ .Environment.Name }}.yaml
+      - image:
+          tag: {{ requiredEnv "CIRCLE_SHA1" }}      
     secrets:
       - ./charts/nginx-hello/secrets.{{ .Environment.Name }}.yaml
