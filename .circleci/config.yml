@@ -16,15 +16,6 @@ jobs:
             docker login -u "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASS"
             docker push $IMAGE_NAME:latest
             docker push $IMAGE_NAME:$CIRCLE_SHA1
-            echo $OUTPUT_SHA_DH
-            pwd
-            mkdir -p workspace
-            echo $OUTPUT_SHA_DH >> workspace/vars
-            cat workspace/vars
-      - persist_to_workspace:
-          root: workspace
-          paths:
-            - vars
   deploy_to_cluster_dev:
     docker:
       - image: emiliork1231/gcp-sdk:latest
@@ -34,8 +25,6 @@ jobs:
       - GOOGLE_CLUSTER_NAME: "edl-challenge-dev"
     steps:
       - checkout
-      - attach_workspace:
-          at: /tmp/cci-test/workspace
       - run:
           name: Setup Google Cloud SDK
           command: |
