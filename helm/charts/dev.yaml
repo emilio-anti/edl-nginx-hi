@@ -4,7 +4,7 @@ env:
 secretEnv:
   - name: SUPERSECRET
     secretKeyRefName: credentials
-    secretKeyRefKey: first-password
+    secretKeyRefKey: third-password
 
 image:
   registry: docker.io

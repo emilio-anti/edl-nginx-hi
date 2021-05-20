@@ -10,7 +10,7 @@ releases:
       - ./charts/nginx-hello/values.yaml
       - ./charts/{{ .Environment.Name }}.yaml
       - image:
-          tag: {{ requiredEnv "CIRCLE_SHA1" }}
+          tag: latest
 
     secrets:
       - ./charts/nginx-hello/secrets.{{ .Environment.Name }}.yaml
