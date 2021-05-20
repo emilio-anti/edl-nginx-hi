@@ -4,4 +4,4 @@ env:
 secretEnv:
   - name: SUPERSECRET
     secretKeyRefName: credentials
-    secretKeyRefKey: second-password
+    secretKeyRefKey: first-password
